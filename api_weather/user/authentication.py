@@ -5,9 +5,11 @@ from django.conf import settings
 from .models import UserEntity
 
 def authenticate(username, password):
+    # regra de autenticação (ignorada por enquanto)
     if username == 'user' and password == 'a1b2c3':
+        # deveria retornar com os dados encontrados no banco
         user = UserEntity(username=username, password=password)
-        print(user)
+        # print(user)
         return user
     return None
 
@@ -41,4 +43,5 @@ def getAuthenticatedUser(token):
     _, payload = verifyToken(token)
 
     if payload is not None:
+        # recuperar o usuario no banco
         return UserEntity(username=payload['username'])
